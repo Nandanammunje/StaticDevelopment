@@ -12,22 +12,17 @@ public class FileCopier {
 
 	public void FileCopy(List<String> pathlist) throws IOException
 	{
-		
-		
-		File file =new File(BackendConstants.FILESOURCE);
-		if(!file.exists())
-		{
-			file.mkdir();
-		}
 		for(String s:pathlist)
 		{
+			//System.out.println(s);
+			int index=s.indexOf("\\");
+			String destpath=BackendConstants.FILESOURCE+s.substring(index+1,s.length());
+			System.out.println(destpath);
 			File src=new File(s);
-			int index=s.lastIndexOf("\\");
-           String destpath=BackendConstants.FILESOURCE+"/"+s.substring(index+1,s.length());
-           File dest=new File(destpath);
-           Files.copy(src.toPath(),dest.toPath());
-              
+			File dest=new File(destpath);
+			Files.copy(src.toPath(),dest.toPath());
 		}
+		
 		
 	}
 	
